@@ -1,0 +1,264 @@
+:root {
+    --playerBoardSize: min(70vh, 70vw);
+    --waterColor: #2a4043;
+}
+
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    list-style: none;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    background-color: steelblue;
+    display: grid;
+    grid-template: 100px 1fr / 5fr 4fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.gameName {
+    grid-area: 1/1/2/3;
+    font-size: 4rem;
+    text-shadow: 0px 0px 15px black;
+    color: white;
+    -webkit-text-stroke: 3px black;
+}
+
+.playerBoard {
+    grid-area: 2/1/3/2;
+    height: var(--playerBoardSize);
+    width: var(--playerBoardSize);
+    display: grid;
+    grid-template: 10% 1fr / 10% 1fr;
+    position: relative;
+}
+
+.opponentBoard {
+    grid-area: 2/2/3/3;
+    height: calc(var(--playerBoardSize) * .8);
+    width: calc(var(--playerBoardSize) * .8);
+    display: grid;
+    grid-template: 10% 1fr / 10% 1fr;
+    position: relative;
+}
+
+.enemyBoard {
+    grid-area: 2/2/3/3;
+    /* height: calc(var(--playerBoardSize) * .8);
+    width: calc(var(--playerBoardSize) * .8); */
+    height: calc(var(--playerBoardSize));
+    width: calc(var(--playerBoardSize));
+    display: grid;
+    grid-template: 10% 1fr / 10% 1fr;
+    position: relative;
+}
+
+.playerName,
+.opponentName,
+.enemyName {
+    position: absolute;
+    justify-self: center;
+    top: -40px;
+    font-size: 2rem;
+}
+
+.rowMarkers {
+    grid-area: 2/1/3/2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.columnMarkers {
+    grid-area: 1/2/2/3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rowLabel,
+.columnLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.rowLabel {
+    height: 10%;
+    width: 100%;
+}
+
+.columnLabel {
+    height: 100%;
+    width: 100%;
+}
+
+.playerGameSquares,
+.opponentGameSquares,
+.enemyGameSquares {
+    grid-area: 2/2/3/3;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.playerSquare,
+.opponentSquare,
+.enemySquare {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.playerSquare {
+    background-position: center;
+    background-size: cover;
+}
+
+.opponentGameSquares:hover,
+.enemyGameSquares:hover {
+    cursor: crosshair;
+}
+
+.enemySquare:hover,
+.opponentSquare:hover {
+    box-shadow: 0 0 2px 2px red;
+    border-radius: 8px;
+}
+
+.targetHit {
+    position: absolute;
+    height: 130%;
+    width: 130%;
+}
+
+.targetMiss {
+    height: 80%;
+    width: 80%;
+    opacity: .8;
+}
+
+.newGameOptions {
+    grid-area: 2/1/3/3;
+}
+
+.playerNameSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10vh;
+    margin-bottom: 50vh;
+}
+
+.nameInput label,
+.nameInput input {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.nameInput label {
+    margin-bottom: 8px;
+    font-size: 2rem;
+}
+
+.nameInput input {
+    appearance: none;
+    outline: none;
+    border: 1px solid var(--waterColor);
+    border-radius: 10px;
+    font-size: 3rem;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: none;
+}
+
+.nameInput input:hover {
+    box-shadow: inset 0 0 8px black;
+}
+
+.nameInput input:focus {
+    box-shadow: inset 0 0 8px black;
+}
+
+.startGame,
+.resetGame,
+.helperBtn {
+    padding: 20px 40px;
+    font-size: 2rem;
+    border: none;
+    background-color: black;
+    box-shadow: 0 0 4px rgba(255, 255, 255);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.alertBox {
+    position: fixed;
+    z-index: 500;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15vh;
+    text-align: center;
+}
+
+.alertTextBox {
+    font-size: 4rem;
+    -webkit-text-stroke: 3px black;
+    color: rgb(167, 0, 0);
+    font-weight: 700;
+    text-align: center;
+}
+
+.placementHelper {
+    grid-area: 2/2/3/3;
+    height: calc(var(--playerBoardSize) * 0.8);
+    width: calc(var(--playerBoardSize) * 0.8);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 30%;
+    margin: 10px;
+}
+
+.helperText {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.validPlacement {
+    background-color: green;
+}
+
+.invalidPlacement {
+    background-color: red;
+}
+
+.hidden {
+    display: none;
+}
